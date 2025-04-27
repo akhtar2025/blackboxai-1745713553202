@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dasar Safety Riding - E-Learning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .quiz-section { display: none; }
+        .quiz-section.active { display: block; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-blue-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold">Dasar Safety Riding</h1>
+            <a href="dashboard.html" class="text-sm bg-blue-700 px-4 py-2 rounded hover:bg-blue-800">
+                Kembali ke Dashboard
+            </a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Learning Content -->
+        <div id="learning-content" class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-6">Materi Dasar Safety Riding</h2>
+
+            <!-- Definisi -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold mb-4 text-blue-600">1. Definisi Safety Riding</h3>
+                <p class="text-gray-700 mb-4">
+                    Safety Riding adalah cara berkendara yang aman dan nyaman baik bagi pengendara itu sendiri maupun bagi pengguna jalan lain. Safety riding bertujuan untuk mencegah terjadinya kecelakaan lalu lintas dengan memperhatikan berbagai aspek keselamatan berkendara.
+                </p>
+            </div>
+
+            <!-- APD -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold mb-4 text-blue-600">2. Alat Pelindung Diri (APD)</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <i class="fas fa-helmet-safety text-blue-500 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-semibold">Helm SNI</h4>
+                            <p class="text-gray-700">Pelindung kepala yang wajib memenuhi standar SNI untuk menjamin keamanan maksimal.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-glasses text-blue-500 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-semibold">Kacamata</h4>
+                            <p class="text-gray-700">Melindungi mata dari debu, angin, dan benda asing saat berkendara.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-mitten text-blue-500 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-semibold">Sarung Tangan</h4>
+                            <p class="text-gray-700">Melindungi tangan dari cuaca dan memberikan grip yang lebih baik saat berkendara.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-shoe-prints text-blue-500 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-semibold">Sepatu</h4>
+                            <p class="text-gray-700">Melindungi kaki dan memberikan kontrol yang lebih baik saat mengoperasikan motor.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cara Berkendara -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold mb-4 text-blue-600">3. Cara Berkendara yang Aman</h3>
+                <ul class="list-disc list-inside space-y-3 text-gray-700">
+                    <li>Selalu periksa kondisi motor sebelum berkendara (WASSER: Water, Accu, Spion, Sign, Engine, Rem)</li>
+                    <li>Pastikan posisi duduk yang tepat dan nyaman</li>
+                    <li>Selalu nyalakan lampu utama saat berkendara</li>
+                    <li>Patuhi rambu dan peraturan lalu lintas</li>
+                    <li>Jaga jarak aman dengan kendaraan lain</li>
+                    <li>Gunakan sein saat akan berbelok atau berpindah lajur</li>
+                    <li>Hindari berkendara dalam kondisi mengantuk atau lelah</li>
+                </ul>
+            </div>
+
+            <button onclick="showQuiz()" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+                Mulai Quiz
+            </button>
+        </div>
+
+        <!-- Quiz Section -->
+        <div id="quiz-section" class="quiz-section bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold mb-6">Quiz Dasar Safety Riding</h2>
+            
+            <form id="quiz-form" onsubmit="submitQuiz(event)" class="space-y-6">
+                <!-- Afektif Questions -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold text-blue-600">Pertanyaan Afektif</h3>
+                    
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <p class="font-semibold mb-2">1. Bagaimana sikap Anda ketika melihat pengendara lain melanggar aturan lalu lintas?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="q1" value="a" required class="mr-2">
+                                <span>Mengabaikan karena bukan urusan saya</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q1" value="b" required class="mr-2">
+                                <span>Mengingatkan dengan cara yang sopan jika memungkinkan</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q1" value="c" required class="mr-2">
+                                <span>Menegur dengan keras</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <p class="font-semibold mb-2">2. Apa yang Anda lakukan jika helm SNI Anda rusak?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="q2" value="a" required class="mr-2">
+                                <span>Tetap menggunakannya karena masih bisa dipakai</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q2" value="b" required class="mr-2">
+                                <span>Segera menggantinya dengan helm SNI yang baru</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q2" value="c" required class="mr-2">
+                                <span>Menggantinya dengan helm non-SNI yang lebih murah</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <p class="font-semibold mb-2">3. Bagaimana sikap Anda saat berkendara dalam kondisi hujan?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="q3" value="a" required class="mr-2">
+                                <span>Mempercepat laju kendaraan agar cepat sampai</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q3" value="b" required class="mr-2">
+                                <span>Mengurangi kecepatan dan lebih berhati-hati</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q3" value="c" required class="mr-2">
+                                <span>Tetap berkendara seperti biasa</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Kognitif Questions -->
+                    <h3 class="text-xl font-semibold text-blue-600 mt-6">Pertanyaan Kognitif</h3>
+                    
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <p class="font-semibold mb-2">4. Apa kepanjangan dari WASSER dalam pemeriksaan motor?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="q4" value="a" required class="mr-2">
+                                <span>Water, Air, System, Sign, Engine, Rem</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q4" value="b" required class="mr-2">
+                                <span>Water, Accu, Spion, Sign, Engine, Rem</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q4" value="c" required class="mr-2">
+                                <span>Water, Accu, System, Speed, Engine, Rem</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <p class="font-semibold mb-2">5. Mengapa penggunaan helm SNI wajib bagi pengendara motor?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="q5" value="a" required class="mr-2">
+                                <span>Karena ada sanksi tilang jika tidak menggunakan</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q5" value="b" required class="mr-2">
+                                <span>Karena telah diuji dan memenuhi standar keselamatan nasional</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q5" value="c" required class="mr-2">
+                                <span>Karena harganya lebih mahal</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+                    Submit Quiz
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        // Check authentication
+        if (!Auth.isLoggedIn()) {
+            window.location.href = 'index.html';
+        }
+
+        const answers = {
+            q1: 'b',
+            q2: 'b',
+            q3: 'b',
+            q4: 'b',
+            q5: 'b'
+        };
+
+        function showQuiz() {
+            document.getElementById('learning-content').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'block';
+        }
+
+        function submitQuiz(event) {
+            event.preventDefault();
+            
+            let score = 0;
+            const total = Object.keys(answers).length;
+            
+            // Calculate score
+            Object.keys(answers).forEach(question => {
+                const selected = document.querySelector(`input[name="${question}"]:checked`);
+                if (selected && selected.value === answers[question]) {
+                    score++;
+                }
+            });
+
+            // Convert to percentage
+            const percentage = (score / total) * 100;
+
+            // Update progress
+            Auth.updateProgress('basic', percentage);
+
+            // Show result and redirect
+            alert(`Nilai Anda: ${percentage}%\nSilakan lanjut ke materi berikutnya!`);
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>
