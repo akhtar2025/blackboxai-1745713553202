@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - E-Learning Safety Riding</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-blue-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold">Analytics Dashboard</h1>
+            <div class="flex space-x-4">
+                <button onclick="exportData()" class="text-sm bg-green-600 px-4 py-2 rounded hover:bg-green-700">
+                    <i class="fas fa-file-excel mr-2"></i>Export Excel
+                </button>
+                <a href="dashboard.html" class="text-sm bg-blue-700 px-4 py-2 rounded hover:bg-blue-800">
+                    Kembali ke Dashboard
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <!-- Department Access Card -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-semibold mb-4">
+                    <i class="fas fa-users text-blue-600 mr-2"></i>
+                    Akses per Bagian
+                </h2>
+                <div id="department-access" class="space-y-4">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Average Scores Card -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-semibold mb-4">
+                    <i class="fas fa-star text-blue-600 mr-2"></i>
+                    Rata-rata Nilai per Bagian
+                </h2>
+                <div id="department-scores" class="space-y-4">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Module Completion Stats -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4">
+                <i class="fas fa-chart-bar text-blue-600 mr-2"></i>
+                Statistik Penyelesaian Modul
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                <div class="p-4 bg-blue-50 rounded-lg">
+                    <h3 class="font-semibold text-blue-600">Dasar Safety Riding</h3>
+                    <div id="basic-completion" class="mt-2">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="p-4 bg-blue-50 rounded-lg">
+                    <h3 class="font-semibold text-blue-600">Teknik Pengereman</h3>
+                    <div id="braking-completion" class="mt-2">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="p-4 bg-blue-50 rounded-lg">
+                    <h3 class="font-semibold text-blue-600">Antisipasi Bahaya</h3>
+                    <div id="hazard-completion" class="mt-2">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="p-4 bg-blue-50 rounded-lg">
+                    <h3 class="font-semibold text-blue-600">Micro Sleep</h3>
+                    <div id="microsleep-completion" class="mt-2">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="p-4 bg-blue-50 rounded-lg">
+                    <h3 class="font-semibold text-blue-600">Blind Spot</h3>
+                    <div id="blindspot-completion" class="mt-2">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Completions -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-xl font-semibold mb-4">
+                <i class="fas fa-clock text-blue-600 mr-2"></i>
+                Penyelesaian Terbaru
+            </h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full table-auto">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">NPK</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bagian</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rata-rata Nilai</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Selesai</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-completions" class="bg-white divide-y divide-gray-200">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        // Check authentication
+        if (!Auth.isLoggedIn()) {
+            window.location.href = 'index.html';
+        }
+
+        function updateDepartmentAccess() {
+            const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+            const accessDiv = document.getElementById('department-access');
+            const sortedDepts = Object.entries(data.analytics.departmentAccess)
+                .sort((a, b) => b[1] - a[1]);
+
+            accessDiv.innerHTML = sortedDepts.map(([dept, count]) => `
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700">${dept}</span>
+                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">${count} akses</span>
+                </div>
+            `).join('');
+        }
+
+        function updateDepartmentScores() {
+            const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+            const scoresDiv = document.getElementById('department-scores');
+            const sortedScores = Object.entries(data.analytics.averageScores)
+                .sort((a, b) => b[1] - a[1]);
+
+            scoresDiv.innerHTML = sortedScores.map(([dept, score]) => `
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700">${dept}</span>
+                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded">${score.toFixed(1)}%</span>
+                </div>
+            `).join('');
+        }
+
+        function updateModuleCompletions() {
+            const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+            const users = Object.values(data.users);
+            const modules = ['basic', 'braking', 'hazard', 'microsleep', 'blindspot'];
+
+            modules.forEach(module => {
+                const completed = users.filter(user => user.progress[module].completed).length;
+                const percentage = users.length ? ((completed / users.length) * 100).toFixed(1) : 0;
+                
+                document.getElementById(`${module}-completion`).innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-700">${completed} selesai</span>
+                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">${percentage}%</span>
+                    </div>
+                `;
+            });
+        }
+
+        function updateRecentCompletions() {
+            const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+            const completedUsers = Object.values(data.users)
+                .filter(user => user.completionDate)
+                .sort((a, b) => new Date(b.completionDate) - new Date(a.completionDate));
+
+            const tbody = document.getElementById('recent-completions');
+            tbody.innerHTML = completedUsers.map(user => {
+                const avgScore = Object.values(user.progress)
+                    .reduce((sum, p) => sum + p.score, 0) / Object.keys(user.progress).length;
+                
+                return `
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${user.npk}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${user.nama}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${user.bagian}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${avgScore.toFixed(1)}%</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            ${new Date(user.completionDate).toLocaleDateString('id-ID')}
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function exportData() {
+            Auth.exportToExcel();
+        }
+
+        // Initialize dashboard
+        updateDepartmentAccess();
+        updateDepartmentScores();
+        updateModuleCompletions();
+        updateRecentCompletions();
+    </script>
+</body>
+</html>
