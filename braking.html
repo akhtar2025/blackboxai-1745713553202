@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teknik Pengereman - E-Learning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .quiz-section { display: none; }
+        .quiz-section.active { display: block; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-blue-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold">Teknik Pengereman</h1>
+            <a href="dashboard.html" class="text-sm bg-blue-700 px-4 py-2 rounded hover:bg-blue-800">
+                Kembali ke Dashboard
+            </a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Learning Content -->
+        <div id="learning-content" class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-6">Materi Teknik Pengereman</h2>
+
+            <!-- Cara-cara Pengereman -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold mb-4 text-blue-600">1. Cara-cara Pengereman</h3>
+                <div class="space-y-4">
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <h4 class="font-semibold text-lg mb-2">a. Pengereman Normal</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Gunakan rem depan dan belakang secara bersamaan</li>
+                            <li>Tekan rem secara bertahap, tidak mendadak</li>
+                            <li>Perhatikan kondisi jalan dan jarak aman</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <h4 class="font-semibold text-lg mb-2">b. Pengereman Darurat</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Tekan rem depan dan belakang dengan kuat tapi terkendali</li>
+                            <li>Jaga posisi badan tetap tegak</li>
+                            <li>Perhatikan kondisi sekitar untuk menghindari tabrakan beruntun</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <h4 class="font-semibold text-lg mb-2">c. Pengereman di Jalan Basah</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Kurangi kecepatan lebih awal</li>
+                            <li>Gunakan rem lebih lembut untuk menghindari selip</li>
+                            <li>Jaga jarak yang lebih jauh dengan kendaraan di depan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Langkah Pengereman yang Baik -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold mb-4 text-blue-600">2. Langkah Pengereman yang Baik</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-blue-100 rounded-full p-2 mr-4">
+                            <span class="text-blue-600 font-bold">1</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Antisipasi</h4>
+                            <p class="text-gray-700">Selalu perhatikan kondisi jalan dan lalu lintas di depan untuk mengantisipasi kebutuhan pengereman.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start mb-4">
+                        <div class="bg-blue-100 rounded-full p-2 mr-4">
+                            <span class="text-blue-600 font-bold">2</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Posisi Tangan</h4>
+                            <p class="text-gray-700">Pastikan jari-jari selalu siap di tuas rem untuk respons cepat.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start mb-4">
+                        <div class="bg-blue-100 rounded-full p-2 mr-4">
+                            <span class="text-blue-600 font-bold">3</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Kontrol Kecepatan</h4>
+                            <p class="text-gray-700">Sesuaikan kecepatan dengan kondisi jalan dan kurangi gas sebelum pengereman.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="bg-blue-100 rounded-full p-2 mr-4">
+                            <span class="text-blue-600 font-bold">4</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Eksekusi</h4>
+                            <p class="text-gray-700">Lakukan pengereman dengan halus dan terkontrol.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="showQuiz()" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+                Mulai Quiz
+            </button>
+        </div>
+
+        <!-- Quiz Section -->
+        <div id="quiz-section" class="quiz-section bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold mb-6">Quiz Teknik Pengereman</h2>
+            
+            <form id="quiz-form" onsubmit="submitQuiz(event)" class="space-y-6">
+                <!-- Afektif Questions -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold text-blue-600">Pertanyaan Afektif</h3>
+                    
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <p class="font-semibold mb-2">1. Apa yang Anda lakukan ketika mendekati persimpangan jalan?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="q1" value="a" required class="mr-2">
+                                <span>Tetap melaju dengan kecepatan yang sama</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q1" value="b" required class="mr-2">
+                                <span>Mengurangi kecepatan dan bersiap untuk berhenti</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q1" value="c" required class="mr-2">
+                                <span>Mempercepat laju untuk segera melewati persimpangan</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <p class="font-semibold mb-2">2. Bagaimana sikap Anda saat menghadapi jalan yang licin?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="q2" value="a" required class="mr-2">
+                                <span>Mengerem mendadak saat diperlukan</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q2" value="b" required class="mr-2">
+                                <span>Mengurangi kecepatan dan mengerem lebih awal</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q2" value="c" required class="mr-2">
+                                <span>Mengabaikan kondisi jalan</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <p class="font-semibold mb-2">3. Apa yang Anda lakukan jika rem motor terasa tidak normal?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="q3" value="a" required class="mr-2">
+                                <span>Tetap menggunakan motor tersebut</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q3" value="b" required class="mr-2">
+                                <span>Segera membawa ke bengkel untuk diperiksa</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q3" value="c" required class="mr-2">
+                                <span>Menunggu sampai rem benar-benar rusak</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Kognitif Questions -->
+                    <h3 class="text-xl font-semibold text-blue-600 mt-6">Pertanyaan Kognitif</h3>
+                    
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <p class="font-semibold mb-2">4. Mengapa penggunaan rem depan dan belakang secara bersamaan penting?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="q4" value="a" required class="mr-2">
+                                <span>Agar rem lebih awet</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q4" value="b" required class="mr-2">
+                                <span>Untuk distribusi pengereman yang seimbang dan efektif</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q4" value="c" required class="mr-2">
+                                <span>Tidak ada pengaruhnya</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <p class="font-semibold mb-2">5. Apa yang harus dilakukan saat pengereman darurat?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="q5" value="a" required class="mr-2">
+                                <span>Panik dan menghindar mendadak</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q5" value="b" required class="mr-2">
+                                <span>Tekan rem kuat tapi terkendali dan jaga posisi badan</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q5" value="c" required class="mr-2">
+                                <span>Hanya menggunakan rem depan sekuat mungkin</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+                    Submit Quiz
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        // Check authentication
+        if (!Auth.isLoggedIn()) {
+            window.location.href = 'index.html';
+        }
+
+        const answers = {
+            q1: 'b',
+            q2: 'b',
+            q3: 'b',
+            q4: 'b',
+            q5: 'b'
+        };
+
+        function showQuiz() {
+            document.getElementById('learning-content').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'block';
+        }
+
+        function submitQuiz(event) {
+            event.preventDefault();
+            
+            let score = 0;
+            const total = Object.keys(answers).length;
+            
+            // Calculate score
+            Object.keys(answers).forEach(question => {
+                const selected = document.querySelector(`input[name="${question}"]:checked`);
+                if (selected && selected.value === answers[question]) {
+                    score++;
+                }
+            });
+
+            // Convert to percentage
+            const percentage = (score / total) * 100;
+
+            // Update progress
+            Auth.updateProgress('braking', percentage);
+
+            // Show result and redirect
+            alert(`Nilai Anda: ${percentage}%\nSilakan lanjut ke materi berikutnya!`);
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>
